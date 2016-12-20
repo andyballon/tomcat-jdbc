@@ -32,9 +32,12 @@
         </license>
     </licenses>
 
-    <scm>
-        <connection>scm:git:git@github.com:welshstew/tomcat-jdbc.git</connection>
-    </scm>
+    <distributionManagement>
+    <repository>
+        <id>nexus</id>
+        <url>http://nexus-ci.cloudapps-a2ff.oslab.opentlc.com/content/repositories/releases/</url>
+    </repository>
+    </distributionManagement>
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -106,33 +109,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>versions-maven-plugin</artifactId>
                         <version>2.1</version>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-scm-plugin</artifactId>
-                        <version>1.8.1</version>
-                        <configuration>
-                            <tag>${project.artifactId}-${project.version}</tag>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.5.1</version>
-                        <executions>
-                            <execution>
-                                <id>default-deploy</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <serverId>nexus</serverId>
-                            <nexusUrl>http://nexus-ci.cloudapps-a2ff.oslab.opentlc.com/nexus/</nexusUrl>
-                            <skipStaging>true</skipStaging>
-                        </configuration>
-                    </plugin>
+                    </plugin>                    
                 </plugins>
             </build>
         </profile>
