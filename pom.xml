@@ -31,6 +31,11 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
         </license>
     </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:welshstew/tomcat-jdbc.git</connection>
+    </scm>
+
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
@@ -95,6 +100,18 @@
                         <version>${version.surefire.plugin}</version>
                         <configuration>
                             <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                        <version>2.1</version>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-scm-plugin</artifactId>
+                        <version>1.8.1</version>
+                        <configuration>
+                            <tag>${project.artifactId}-${project.version}</tag>
                         </configuration>
                     </plugin>
                     <plugin>
