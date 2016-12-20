@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.openshift.quickstarts</groupId>
     <artifactId>tomcat-jdbc</artifactId>
-    <version>0_SNAPSHOT</version>
+    <version>0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>OpenShift Quickstarts: Tomcat List: JDBC</name>
     <description>Tomcat list</description>
