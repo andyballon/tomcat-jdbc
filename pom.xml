@@ -17,14 +17,12 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.openshift.quickstarts</groupId>
     <artifactId>tomcat-jdbc</artifactId>
-    <version>1.2.0.Final</version>
+    <version>0_SNAPSHOT</version>
     <packaging>war</packaging>
     <name>OpenShift Quickstarts: Tomcat List: JDBC</name>
     <description>Tomcat list</description>
-
     <url>http://jboss.org/jbossas</url>
     <licenses>
         <license>
@@ -33,32 +31,23 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
         </license>
     </licenses>
-
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
         <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
             resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
         <!-- JBoss dependency versions -->
         <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
-
         <!-- other plugin versions -->
         <version.surefire.plugin>2.10</version.surefire.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
-
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
-
         <jboss-servlet-api_3.0_spec.version>1.0.0.Final</jboss-servlet-api_3.0_spec.version>
     </properties>
-
-
-    <dependencyManagement>
-    </dependencyManagement>
-
+    <dependencyManagement/>
     <dependencies>
         <dependency>
             <groupId>org.jboss.spec.javax.servlet</groupId>
@@ -67,7 +56,6 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
     <build>
         <!-- Maven will append the version to the finalName (which is the name 
             given to the generated war, and hence the context root) -->
@@ -90,7 +78,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <!-- The default profile skips all tests, though you can tune it to run 
@@ -110,10 +97,28 @@
                             <skip>true</skip>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.5.1</version>
+                        <executions>
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>deploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <serverId>nexus</serverId>
+                            <nexusUrl>http://nexus-ci.cloudapps-a2ff.oslab.opentlc.com/nexus/</nexusUrl>
+                            <skipStaging>true</skipStaging>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
-
         <profile>
             <!-- When built in OpenShift the 'openshift' profile will be used when 
                 invoking mvn. -->
@@ -132,10 +137,9 @@
                             <outputDirectory>deployments</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
-                    </plugin>
+                    </plugin>                    
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 </project>
