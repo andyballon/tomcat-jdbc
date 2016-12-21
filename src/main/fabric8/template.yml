@@ -1,0 +1,88 @@
+---
+apiVersion: "v1"
+kind: "Template"
+metadata:
+  name: "tomcat-jdbc"
+parameters:
+- description: The name for the application.
+  name: APPLICATION_NAME
+  required: true
+  value: jws-app
+- description: 'Custom hostname for http service route.  Leave blank for default hostname,
+    e.g.: <application-name>-<project>.<default-domain-suffix>'
+  name: HOSTNAME_HTTP
+- description: 'Custom hostname for https service route.  Leave blank for default
+    hostname, e.g.: secure-<application-name>-<project>.<default-domain-suffix>'
+  name: HOSTNAME_HTTPS
+- description: Git source URI for application
+  name: SOURCE_REPOSITORY_URL
+  required: true
+  value: https://github.com/jboss-openshift/openshift-quickstarts
+- description: Git branch/tag reference
+  name: SOURCE_REPOSITORY_REF
+  value: "1.2"
+- description: Path within Git project to build; empty for root project directory.
+  name: CONTEXT_DIR
+  value: todolist/todolist-jdbc
+- description: Database JNDI name used by application to resolve the datasource, e.g.
+    jboss/datasources/postgresqlDS
+  name: DB_JNDI
+  value: jboss/datasources/defaultDS
+- description: Database name
+  name: DB_DATABASE
+  required: true
+  value: root
+- description: Size of persistent storage for database volume.
+  name: VOLUME_CAPACITY
+  required: true
+  value: 512Mi
+- description: The name of the secret containing the certificate files
+  name: JWS_HTTPS_SECRET
+  required: true
+  value: jws-app-secret
+- description: The name of the certificate file within the secret
+  name: JWS_HTTPS_CERTIFICATE
+  value: server.crt
+- description: The name of the certificate key file within the secret
+  name: JWS_HTTPS_CERTIFICATE_KEY
+  value: server.key
+- description: The certificate password
+  name: JWS_HTTPS_CERTIFICATE_PASSWORD
+- description: Sets xa-pool/min-pool-size for the configured datasource.
+  name: DB_MIN_POOL_SIZE
+- description: Sets xa-pool/max-pool-size for the configured datasource.
+  name: DB_MAX_POOL_SIZE
+- description: Sets transaction-isolation for the configured datasource.
+  name: DB_TX_ISOLATION
+- description: The maximum number of client connections allowed. This also sets the
+    maximum number of prepared transactions.
+  name: POSTGRESQL_MAX_CONNECTIONS
+- description: Configures how much memory is dedicated to PostgreSQL for caching data.
+  name: POSTGRESQL_SHARED_BUFFERS
+- description: Database user name
+  from: user[a-zA-Z0-9]{3}
+  generate: expression
+  name: DB_USERNAME
+  required: true
+- description: Database user password
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: DB_PASSWORD
+  required: true
+- description: JWS Admin User
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: JWS_ADMIN_USERNAME
+  required: true
+- description: JWS Admin Password
+  from: '[a-zA-Z0-9]{8}'
+  generate: expression
+  name: JWS_ADMIN_PASSWORD
+  required: true
+- description: Namespace in which the ImageStreams for Red Hat Middleware images are
+    installed. These ImageStreams are normally installed in the openshift namespace.
+    You should only need to modify this if you've installed the ImageStreams in a
+    different namespace/project.
+  name: IMAGE_STREAM_NAMESPACE
+  required: true
+  value: openshift

@@ -54,7 +54,11 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
         <jboss-servlet-api_3.0_spec.version>1.0.0.Final</jboss-servlet-api_3.0_spec.version>
+        <fabric8.maven.version>3.2.1</fabric8.maven.version>
+        <fabric8.mode>kubernetes</fabric8.mode>
+        <fabric8.useProjectClasspath>true</fabric8.useProjectClasspath>
     </properties>
+
     <dependencyManagement/>
     <dependencies>
         <dependency>
@@ -69,6 +73,33 @@
             given to the generated war, and hence the context root) -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-maven-plugin</artifactId>
+                <version>${fabric8.maven.version}</version>
+                <configuration>
+                    <generator>
+                        <config>
+                            <java-exec>
+                                <mainClass>something.Empty</mainClass>
+                            </java-exec>
+                        </config>
+                    </generator>
+                    <enricher>
+                        <excludes>
+                            <exclude>f8-prometheus</exclude>
+                        </excludes>
+                    </enricher>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>resource</goal>
+                            <goal>app-catalog</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>
