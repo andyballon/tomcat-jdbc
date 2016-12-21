@@ -10,14 +10,27 @@ spec:
       kind: ImageStreamTag
       name: ${APPLICATION_NAME}:latest
   source:
-    contextDir: ${CONTEXT_DIR}
     git:
-      ref: ${SOURCE_REPOSITORY_REF}
       uri: ${SOURCE_REPOSITORY_URL}
     type: Git
   strategy:
     sourceStrategy:
       forcePull: true
+      env:
+      - name: NEXUS_URL
+        value: ${NEXUS_URL}
+      - name: REPOSITORY_NAME
+        value: ${REPOSITORY_NAME}
+      - name: GROUP_ID
+        value: ${GROUP_ID}
+      - name: ARTIFACT_ID
+        value: ${ARTIFACT_ID}
+      - name: CLASSIFIER
+        value: ${CLASSIFIER}
+      - name: EXTENSION
+        value: ${EXTENSION}
+      - name: ARTIFACT_VERSION
+        value: ${ARTIFACT_VERSION}
       from:
         kind: ImageStreamTag
         name: jboss-webserver30-tomcat8-openshift:1.2

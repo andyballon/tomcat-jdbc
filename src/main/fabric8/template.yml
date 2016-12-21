@@ -17,13 +17,7 @@ parameters:
 - description: Git source URI for application
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: https://github.com/jboss-openshift/openshift-quickstarts
-- description: Git branch/tag reference
-  name: SOURCE_REPOSITORY_REF
-  value: "1.2"
-- description: Path within Git project to build; empty for root project directory.
-  name: CONTEXT_DIR
-  value: todolist/todolist-jdbc
+  value: https://github.com/welshstew/tomcat-jdbc
 - description: Database JNDI name used by application to resolve the datasource, e.g.
     jboss/datasources/postgresqlDS
   name: DB_JNDI
@@ -86,3 +80,31 @@ parameters:
   name: IMAGE_STREAM_NAMESPACE
   required: true
   value: openshift
+- description: nexus url
+  name: NEXUS_URL
+  required: true
+  value: http://nexus-ci.cloudapps-a2ff.oslab.opentlc.com/
+- description: nexus repository name
+  name: REPOSITORY_NAME
+  required: true
+  value: releases
+- description: deployable group id to fetch from nexus
+  name: GROUP_ID
+  required: true
+  value: org.openshift.quickstarts
+- description: deployable artifact id to fetch from nexus
+  name: ARTIFACT_ID
+  required: true
+  value: tomcat-jdbc
+- description: deployable classifier to fetch from nexus
+  name: CLASSIFIER
+  required: false
+  value: ""
+- description: deployable file extension to fetch from nexus
+  name: EXTENSION
+  required: true
+  value: war
+- description: artifact version to fetch from nexus
+  name: ARTIFACT_VERSION
+  required: true
+  value: 1.0.10
