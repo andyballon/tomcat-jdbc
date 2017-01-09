@@ -58,7 +58,7 @@
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
         <jboss-servlet-api_3.0_spec.version>1.0.0.Final</jboss-servlet-api_3.0_spec.version>
-        <fabric8.maven.version>3.2.1</fabric8.maven.version>
+        <fabric8.maven.version>3.2.13</fabric8.maven.version>
         <fabric8.mode>kubernetes</fabric8.mode>
         <fabric8.useProjectClasspath>true</fabric8.useProjectClasspath>
     </properties>
