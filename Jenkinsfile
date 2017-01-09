@@ -2,13 +2,13 @@ node('maven') {
 
     def mvnHome = tool 'M3'
 
-    stage 'Checkout'
-    git branch: 'master', url: 'https://github.com/welshstew/tomcat-jdbc.git'
+    stage('Checkout') {
+        git branch: 'master', url: 'https://github.com/welshstew/tomcat-jdbc.git'
+    }
 
-    // ** NOTE: This 'M3' maven tool must be configured in the global configuration.
-
-    stage 'Set Version'
-    sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml versions:set -DnewVersion=1.1.${env.BUILD_NUMBER}"
+    stage('Set Version') {
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml versions:set -DnewVersion=1.1.${env.BUILD_NUMBER}"
+    }
 
     stage 'Build'
     sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml clean install -DskipTests"
