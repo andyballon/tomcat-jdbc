@@ -1,5 +1,7 @@
 node('maven') {
 
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '431cbc19-9e57-4011-920d-02304cafc84c', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]){
+
     def mvnHome = tool 'M3'
     def newVersion = "1.1.${env.BUILD_NUMBER}"
 
@@ -30,12 +32,12 @@ node('maven') {
                                                                                 -Dtypes=yml,json \
                                                                                 -Dversion=${newVersion}"
 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '431cbc19-9e57-4011-920d-02304cafc84c', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
-            //println "${env.GIT_USERNAME}:${env.GIT_PASSWORD}@https://github.com/welshstew/tomcat-jdbc.git"
-            sh("git config --global user.email \"stuart.winchester@gmail.com\"")
-            sh("git config --global user.name \"Stuart Winchester\"")
-            sh("git tag -a ${newVersion} -m 'Jenkins CI Tag'")
-            sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/welshstew/tomcat-jdbc.git --tags")
-        }
+        //println "${env.GIT_USERNAME}:${env.GIT_PASSWORD}@https://github.com/welshstew/tomcat-jdbc.git"
+        sh("git config --global user.email \"stuart.winchester@gmail.com\"")
+        sh("git config --global user.name \"Stuart Winchester\"")
+        sh("git tag -a ${newVersion} -m 'Jenkins CI Tag'")
+        sh("git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@github.com/welshstew/tomcat-jdbc.git --tags")
+    }
+
     }
 }
