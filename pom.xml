@@ -35,7 +35,7 @@
     <distributionManagement>
     <repository>
         <id>nexus</id>
-        <url>http://nexus-ci.cloudapps-a2ff.oslab.opentlc.com/content/repositories/releases/</url>
+        <url>http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/</url>
     </repository>
     </distributionManagement>
 
