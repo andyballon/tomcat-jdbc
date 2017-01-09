@@ -5,7 +5,7 @@ node('maven') {
 
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '431cbc19-9e57-4011-920d-02304cafc84c', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]){
         gitUsername = "${env.GIT_USERNAME}"
-        gitPassword = "${env.GIT_PASSWORD}""
+        gitPassword = "${env.GIT_PASSWORD}"
     }
 
     def mvnHome = tool 'M3'
