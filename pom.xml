@@ -37,6 +37,10 @@
         <id>nexus</id>
         <url>http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/</url>
     </repository>
+    <snapshotRepository>
+        <id>nexus</id>
+        <url>http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/snapshots/</url>
+    </snapshotRepository>
     </distributionManagement>
 
     <properties>
@@ -108,6 +112,12 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <attach>false</attach>
+                </configuration>
+            </plugin>
             <!-- The JBoss AS plugin deploys your war to a local JBoss EAP container -->
             <!-- To use, run: mvn package jboss-as:deploy -->
             <plugin>
@@ -119,7 +129,7 @@
     </build>
     <profiles>
         <profile>
-            <!-- The default profile skips all tests, though you can tune it to run 
+            <!-- The default profile skips all tests, though you can tune it to run
                 just unit tests based on a custom pattern -->
             <!-- Seperate profiles are provided for running all tests, including Arquillian 
                 tests that execute in the specified container -->

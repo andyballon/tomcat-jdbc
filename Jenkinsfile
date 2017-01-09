@@ -19,7 +19,7 @@ node('maven') {
 
 
     stage 'Deploy and Tag'
-    sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml deploy"
+    sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml deploy:deploy"
 
     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '431cbc19-9e57-4011-920d-02304cafc84c', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
         //println "${env.GIT_USERNAME}:${env.GIT_PASSWORD}@https://github.com/welshstew/tomcat-jdbc.git"
