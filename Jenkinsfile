@@ -21,7 +21,7 @@ node('maven') {
 
 
     stage('Deploy and Tag'){
-        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml mvn org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
                                                                                 -DrepositoryId=nexus \
                                                                                 -Dfile=target/tomcat-jdbc.war \
                                                                                 -DpomFile=pom.xml \
