@@ -44,5 +44,4 @@ node('maven') {
         sh("git push https://${gitUsername}:${gitPassword}@github.com/welshstew/tomcat-jdbc.git --tags")
     }
 
-    }
 }
