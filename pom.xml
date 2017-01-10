@@ -92,6 +92,7 @@
                     <enricher>
                         <excludes>
                             <exclude>f8-prometheus</exclude>
+                            <exclude>fmp-volume-permission</exclude>
                         </excludes>
                     </enricher>
                 </configuration>
