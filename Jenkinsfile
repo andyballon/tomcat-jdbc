@@ -8,7 +8,7 @@ node('maven') {
         gitPassword = "${env.GIT_PASSWORD}"
     }
 
-    def mvnHome = tool 'M3'
+    //def mvnHome = tool 'M3'
     def newVersion = "1.1.${env.BUILD_NUMBER}"
 
     stage('Checkout') {
@@ -16,20 +16,20 @@ node('maven') {
     }
 
     stage('Set Version') {
-        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml versions:set -DnewVersion=${newVersion}"
+        sh "mvn --settings /etc/m2/settings.xml -f pom.xml versions:set -DnewVersion=${newVersion}"
     }
 
     stage('Build') {
-        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml clean install -DskipTests"
+        sh "mvn --settings /etc/m2/settings.xml -f pom.xml clean install -DskipTests"
     }
 
     stage('Unit Test'){
-        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml test"
+        sh "mvn --settings /etc/m2/settings.xml -f pom.xml test"
     }
 
 
     stage('Deploy and Tag'){
-        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
+        sh "mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
                                                                                 -DrepositoryId=nexus \
                                                                                 -Dfile=target/tomcat-jdbc.war \
                                                                                 -DpomFile=pom.xml \
