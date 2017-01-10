@@ -59,7 +59,7 @@ if [ x"NEXUS_URL" != "x" ]; then
     #${NEXUS_URL}/service/local/artifact/maven/redirect?r=${REPOSITORY_NAME}&g=${GROUP_ID}&a=${ARTIFACT_ID}&c=${CLASSIFIER}&e=${EXTENSION}&v=${ARTIFACT_VERSION}"
 
     echo "Started CURL Download from $DEPLOYABLE_FULL_PATH"
-    curl -L  "DEPLOYABLE_FULL_PATH" -o ${DEPLOY_DIR}/ROOT.war
+    curl -L ${DEPLOYABLE_FULL_PATH} -o ${DEPLOY_DIR}/ROOT.war
 
     if [ 0 -eq $? ]; then
       echo "Download complete"
