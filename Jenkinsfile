@@ -28,7 +28,7 @@ node('maven') {
     }
 
     stage('Sonarqube'){
-        def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.jdbc.url=jdbc:postgresql://sonarpsql/sonar -Dsonar.jdbc.username=sonar -Dsonar.jdbc.password=sonar"
     }
 
