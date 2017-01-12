@@ -29,7 +29,7 @@ node('maven') {
 
     stage('Sonarqube'){
         def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.projectKey=org.openshift.quickstarts:tomcat-jdbc -Dsonar.projectName=tomcat-jdbc"
+        sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.projectKey=org.openshift.quickstarts:tomcat-jdbc -Dsonar.projectName=tomcat-jdbc -Dsonar.projectVersion=${newVersion} -Dsonar.sources=/tmp/workspace/tomcat-jdbc"
     }
 
 
