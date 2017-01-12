@@ -27,6 +27,11 @@ node('maven') {
         sh "mvn --settings /etc/m2/settings.xml -f pom.xml test"
     }
 
+    stage('Sonarqube'){
+        def sonarqubeScannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.jdbc.url=jdbc:postgresql://sonarpsql/sonar -Dsonar.jdbc.username=sonar -Dsonar.jdbc.password=sonar"
+    }
+
 
     stage('Deploy and Tag'){
         sh "mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
