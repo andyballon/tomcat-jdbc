@@ -27,10 +27,13 @@ node('maven') {
         sh "mvn --settings /etc/m2/settings.xml -f pom.xml test"
     }
 
+
+    /**
     stage('Sonarqube'){
         def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.projectKey=org.openshift.quickstarts:tomcat-jdbc -Dsonar.projectName=tomcat-jdbc -Dsonar.projectVersion=${newVersion} -Dsonar.sources=/tmp/workspace/tomcat-jdbc -X"
     }
+    **/
 
 
     stage('Deploy and Tag'){

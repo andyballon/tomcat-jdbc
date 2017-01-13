@@ -21,13 +21,18 @@ public class JdbcTomcatDAO implements TomcatDAO {
     private final DataSource dataSource;
 
     public JdbcTomcatDAO() {
-        dataSource = lookupDataSource();
+        dataSource = lookupDataSource(null);
         initializeSchemaIfNeeded();
     }
 
-    private DataSource lookupDataSource() {
+    private DataSource lookupDataSource(Context context) {
+        Context initialContext = null;
         try {
-            Context initialContext = new InitialContext();
+            if (context == null){
+                initialContext = context;
+            }else{
+                initialContext = new InitialContext();
+            }
             try {
                 return (DataSource) initialContext.lookup(System.getenv("DB_JNDI"));
             } catch (NameNotFoundException e) {
