@@ -24,7 +24,7 @@ node('maven') {
     }
 
     stage('Unit Test'){
-        junit '**/target/surefire-reports/*.xml'
+        //junit '**/target/surefire-reports/*.xml'
         sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml test"
     }
 
