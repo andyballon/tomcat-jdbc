@@ -36,6 +36,10 @@ node('maven') {
     }
     **/
 
+    stage('Integration Tests'){
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -Dit.test=CamelAmqIT verify -DBROKER_URL=tcp://broker-amq-tcp:61616 -DBROKER_USERNAME=admin -DBROKER_PASSWORD=admin"
+    }
+
 
     stage('Deploy and Tag'){
         sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
