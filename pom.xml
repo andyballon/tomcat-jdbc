@@ -223,7 +223,7 @@
                 <version>2.19.1</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <BROKER_URL>tcp://broker-amq:61616</BROKER_URL>
+                        <BROKER_URL>tcp://broker-amq-tcp:61616</BROKER_URL>
                         <BROKER_USERNAME>admin</BROKER_USERNAME>
                         <BROKER_PASSWORD>admin</BROKER_PASSWORD>
                     </systemPropertyVariables>
