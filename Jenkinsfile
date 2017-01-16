@@ -8,7 +8,7 @@ node('maven') {
         gitPassword = "${env.GIT_PASSWORD}"
     }
 
-    //def mvnHome = tool 'M3'
+    def mvnHome = tool 'M3'
     def newVersion = "1.1.${env.BUILD_NUMBER}"
 
     stage('Checkout') {
@@ -16,16 +16,16 @@ node('maven') {
     }
 
     stage('Set Version') {
-        sh "mvn --settings /etc/m2/settings.xml -f pom.xml versions:set -DnewVersion=${newVersion}"
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml versions:set -DnewVersion=${newVersion}"
     }
 
     stage('Build') {
-        sh "mvn --settings /etc/m2/settings.xml -f pom.xml clean install -DskipTests"
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml clean install -DskipTests"
     }
 
     stage('Unit Test'){
         junit '**/target/surefire-reports/*.xml'
-        sh "mvn --settings /etc/m2/settings.xml -f pom.xml test"
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml -f pom.xml test"
     }
 
 
@@ -38,7 +38,7 @@ node('maven') {
 
 
     stage('Deploy and Tag'){
-        sh "mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
                                                                                 -DrepositoryId=nexus \
                                                                                 -Dfile=target/tomcat-jdbc.war \
                                                                                 -DpomFile=pom.xml \
