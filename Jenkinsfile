@@ -12,7 +12,7 @@ node('maven') {
     def newVersion = "1.1.${env.BUILD_NUMBER}"
 
     stage('Checkout') {
-        git branch: 'master', url: 'https://github.com/welshstew/tomcat-jdbc.git'
+        git branch: 'master', url: 'https://github.com/andyballon/tomcat-jdbc.git'
     }
 
     stage('Set Version') {
@@ -42,7 +42,7 @@ node('maven') {
 
 
     stage('Deploy and Tag'){
-        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/ \
+        sh "${mvnHome}/bin/mvn --settings /etc/m2/settings.xml org.apache.maven.plugins:maven-deploy-plugin:2.8.2:deploy-file -Durl=http://nexus-ci.cloudapps-078b.oslab.opentlc.com/content/repositories/releases/ \
                                                                                 -DrepositoryId=nexus \
                                                                                 -Dfile=target/tomcat-jdbc.war \
                                                                                 -DpomFile=pom.xml \
@@ -54,7 +54,7 @@ node('maven') {
         sh("git config --global user.email \"stuart.winchester@gmail.com\"")
         sh("git config --global user.name \"Stuart Winchester\"")
         sh("git tag -a ${newVersion} -m 'Jenkins CI Tag'")
-        sh("git push https://${gitUsername}:${gitPassword}@github.com/welshstew/tomcat-jdbc.git --tags")
+        sh("git push https://${gitUsername}:${gitPassword}@github.com/andyballon/tomcat-jdbc.git --tags")
     }
 
 }

@@ -17,7 +17,7 @@ parameters:
 - description: Git source URI for application
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: https://github.com/welshstew/tomcat-jdbc
+  value: https://github.com/andyballon/tomcat-jdbc
 - description: Database JNDI name used by application to resolve the datasource, e.g.
     jboss/datasources/postgresqlDS
   name: DB_JNDI

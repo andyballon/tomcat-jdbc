@@ -35,11 +35,11 @@
     <distributionManagement>
     <repository>
         <id>nexus</id>
-        <url>http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/releases/</url>
+        <url>http://nexus-ci.cloudapps-078b.oslab.opentlc.com/content/repositories/releases/</url>
     </repository>
     <snapshotRepository>
         <id>nexus</id>
-        <url>http://nexus-ci.cloudapps-f109.oslab.opentlc.com/content/repositories/snapshots/</url>
+        <url>http://nexus-ci.cloudapps-078b.oslab.opentlc.com/content/repositories/snapshots/</url>
     </snapshotRepository>
     </distributionManagement>
 
